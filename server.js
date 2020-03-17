@@ -80,18 +80,68 @@ app.get("/api/characters", function(req, res) {
 });
 
 // Displays a single character, or returns false
+// app.get("/api/characters/:character", function(req, res) {
+//   var chosen = req.params.character;
+
+//   console.log(chosen);
+
+//   for (var i = 0; i < characters.length; i++) {
+//     if (chosen === characters[i].routeName) {
+//       return res.json(characters[i]);
+//     }
+//   }
+
+//   return res.json(false);
+// });
+
 app.get("/api/characters/:character", function(req, res) {
-  var chosen = req.params.character;
+  let chosen = req.params.character;
+  debug(chosen);
+  let queryString = `SELECT * FROM ${DBNAME}.${TABLENAME} as c WHERE c.name LIKE '${chosen}%';`;
+  debug(queryString);
 
-  console.log(chosen);
-
-  for (var i = 0; i < characters.length; i++) {
-    if (chosen === characters[i].routeName) {
-      return res.json(characters[i]);
+  mysql.createConnection({
+    host: keys.creds.hostName,
+    port: 8819,
+    user: keys.creds.userName,
+    password: keys.creds.password,
+    database: "star_wars_db"
+  })
+  .query(queryString, function(err, data, fields) {
+    if(err) {
+      throw err;
     }
-  }
 
-  return res.json(false);
+    return res.json(data[0]);
+  });
+
+});
+
+app.get("/api/characters/id/:charKey", function(req, res) {
+  let chosenKey = req.params.charKey;
+  debug(chosenKey);
+  let queryString = `SELECT * FROM ${DBNAME}.${TABLENAME} as c WHERE c.key=${chosenKey};`;
+
+  let connection = mysql.createConnection({
+    host: keys.creds.hostName,
+    port: 8819,
+    user: keys.creds.userName,
+    password: keys.creds.password,
+    database: "star_wars_db"
+  })
+  .query(queryString, function(err, data, fields) {
+    if(err) {
+      throw err;
+    }
+    // return res.json(data);
+      // returnCharacter = data[0].name;
+      // debug('returnCharacter');
+      // debug(returnCharacter);
+
+    return res.json(data[0]);
+  });
+
+  // return res.json(false);
 });
 
 // Create New Characters - takes in JSON input
@@ -108,6 +158,10 @@ app.post("/api/characters", function(req, res) {
   // We then display the JSON to the users
   res.json(newcharacter);
 });
+
+
+
+
 
 // Starts the server to begin listening
 // =============================================================
