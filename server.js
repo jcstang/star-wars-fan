@@ -55,7 +55,7 @@ app.post("/api/characters", function(req, res) {
   // This works because of our body parsing middleware
   var newcharacter = req.body;
 
-  console.log(newcharacter);
+  console.log("new char ", newcharacter);
 
   // We then add the json the user sent to the character array
   characters.push(newcharacter);

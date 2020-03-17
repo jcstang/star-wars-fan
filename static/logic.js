@@ -35,37 +35,63 @@ $(document).ready(function() {
 
   $("#char-submit-btn").on("click", function() {
     event.preventDefault();
+    console.log('submit form func');
+    // console.log( $("#new-char-form").serializeArray() );
 
-    console.log('submit form');
-
+    console.log( $("#characterName").val().trim() );
+    
     let newData = {
-      "routeName": "bazemalbus",
-      "name": "Baze Malbus",
-      "role": "Heavy fire",
-      "age": 39,
-      "forcePoints": 0
+      "routeName": $("#characterName").val().trim(),
+      "name": $("#characterName").val().trim(),
+      "role": $("#characterRole").val().trim(),
+      "age": $("#characterAge").val().trim(),
+      "forcePoints": $("#characterForcePoints").val().trim()
     }
+    // console.log(newData);
+    
+
+    
+    // TODO: validate and save data
+
+    // let newData = {
+    //   "routeName": "bazemalbus",
+    //   "name": "Baze Malbus",
+    //   "role": "Heavy fire",
+    //   "age": 39,
+    //   "forcePoints": 0
+    // }
+
     $.post("/api/characters", newData,
       function (data, status) {
-        console.log('posted?');
+        if(status !== 'success') {
+          throw "something went wrong with post";
+        }
         
+        console.log('posted?');
         console.log(data);
         console.log(status);
     });
+    
 
+
+    $("#new-char-form").hide();
   });
+
+  // $("#new-char-form").on("submit", function() {
+  //   event.preventDefault();
+  //   console.log('inside form submit func');
+
+  //   console.log( $(this).serialize() );
+    
+    
+  // });
 
 
   $("#new-char-btn").on("click", function() {
-    console.log('stuff');
+    console.log('new char btn clicked, show form');
     
     $("#new-char-form").show();
   });
 
-  $("#char-submit-btn").on("click", function() {
-    // TODO: validate and save data
-    
-    $("#new-char-form").hide();
-  });
 
 });
