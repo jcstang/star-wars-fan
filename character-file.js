@@ -21,7 +21,7 @@ module.exports = [
     forcePoints: 1350
   },
   {
-    routeName: "babyYoda",
+    routeName: "babyyoda",
     name: "Baby Yoda",
     role: "unknown",
     age: 50,
