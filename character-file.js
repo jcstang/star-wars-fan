@@ -32,6 +32,6 @@ module.exports = [
     name: "Chewbacca",
     role: "Pilot - The Muscle",
     age: 190,
-    forPoints: 10
+    forcePoints: 10
   }
 ];
