@@ -34,10 +34,23 @@ $(document).ready(function() {
   });
 
   $("#char-submit-btn").on("click", function() {
+    event.preventDefault();
+
     console.log('submit form');
-    
-    $.post("/api/characters/" + "foobar", function(data) {
-      console.log(data);    
+
+    let newData = {
+      "routeName": "bazemalbus",
+      "name": "Baze Malbus",
+      "role": "Heavy fire",
+      "age": 39,
+      "forcePoints": 0
+    }
+    $.post("/api/characters", newData,
+      function (data, status) {
+        console.log('posted?');
+        
+        console.log(data);
+        console.log(status);
     });
 
   });
