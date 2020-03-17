@@ -4,6 +4,7 @@ const express = require("express");
 const path = require("path");
 const characters = require("./character-file");
 const chalk = require("chalk");
+const debug = require("debug")("server");
 
 // Sets up the Express App
 // =============================================================

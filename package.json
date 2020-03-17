@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "watch": "nodemon server.js"
+    "watch": "nodemon server.js",
+    "debug": "DEBUG=* nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/jcstang/star-wars-fan#readme",
   "dependencies": {
     "chalk": "^3.0.0",
+    "debug": "^4.1.1",
     "express": "^4.17.1",
     "nodemon": "^2.0.2"
   }

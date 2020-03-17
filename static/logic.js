@@ -33,6 +33,15 @@ $(document).ready(function() {
     });
   });
 
+  $("#char-submit-btn").on("click", function() {
+    console.log('submit form');
+    
+    $.post("/api/characters/" + "foobar", function(data) {
+      console.log(data);    
+    });
+
+  });
+
 
   $("#new-char-btn").on("click", function() {
     console.log('stuff');
