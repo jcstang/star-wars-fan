@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 
   console.log('I am loaded');
-
+  $("#new-char-form").hide();
 
   // TODO: hide the form
   // $("#new-character-form").hide();
@@ -35,11 +35,15 @@ $(document).ready(function() {
 
 
   $("#new-char-btn").on("click", function() {
-    // do new charcter create things
-    // TODO: display or route to some sort of form
-    // console.log('stuff');
+    console.log('stuff');
     
     $("#new-char-form").show();
+  });
+
+  $("#char-submit-btn").on("click", function() {
+    // TODO: validate and save data
+    
+    $("#new-char-form").hide();
   });
 
 });

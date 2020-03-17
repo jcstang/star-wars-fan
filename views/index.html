@@ -10,8 +10,6 @@
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   
-  
-
 </head>
 
 <body>
@@ -24,7 +22,7 @@
       <button class="btn btn-danger btn-lg" id="new-char-btn"><span class="fa fa-plus"></span> Add New Character</button>
       <!-- new character create form -->
       <div class="container new-character-form">
-        <form id="new-char-form" hidden> 
+        <form id="new-char-form" > 
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -38,7 +36,7 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" id="char-submit-btn">Submit</button>
         </form>
       </div>
       <!-- end of form -->
@@ -78,51 +76,7 @@
     </div>
   </div>
 
-  <script src="../logic.js" ></script>
-  <script type="text/javascript">
-
-    $(document).ready(function() {
-
-      
-      // TODO: hide the form
-      // $("#new-character-form").hide();
-
-      // QUESTION: What is this code doing?
-      $("#search-btn").on("click", function() {
-        var searchedCharacter = $("#character-search").val().trim();
-      
-        // Using a RegEx Pattern to remove spaces from searchedCharacter
-        // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-        searchedCharacter = searchedCharacter.replace(/\s+/g, "").toLowerCase();
-      
-        // QUESTION: What does $.get do? What are the parameters it is expecting?
-        $.get("/api/characters/" + searchedCharacter, function(data) {
-          console.log(data);
-          if (data) {
-            $("#stats").show();
-            $("#name").text(data.name);
-            $("#role").text(data.role);
-            $("#age").text(data.age);
-            $("#force-points").text(data.forcePoints);
-          }
-          else {
-            $("#name").text("The force is not strong with this one. Your character was not found.");
-            $("#stats").hide();
-          }
-        });
-      });
-
-
-      $("#new-char-btn").on("click", function() {
-        // do new charcter create things
-        // TODO: display or route to some sort of form
-        console.log('stuff');
-        
-        $("#new-char-form").show();
-      });
-
-    });
-  </script>
+  <script src="static/logic.js" type="text/javascript"></script>
 </body>
 
 </html>
