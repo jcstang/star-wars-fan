@@ -1,0 +1,23 @@
+{
+  "name": "star-wars-fan",
+  "version": "1.0.0",
+  "description": "Express server, manages star wars characters.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcstang/star-wars-fan.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "Jacob Stanger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcstang/star-wars-fan/issues"
+  },
+  "homepage": "https://github.com/jcstang/star-wars-fan#readme"
+}
