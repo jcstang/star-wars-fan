@@ -8,7 +8,7 @@ const chalk = require("chalk");
 // Sets up the Express App
 // =============================================================
 const app = express();
-const PORT = 3000;
+const PORT = 3005;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +24,7 @@ app.use(express.json());
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
   // res.send("Welcome to the Star Wars Page!")
-  res.sendFile(path.join(__dirname, "views", "view.html"));
+  res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
 // Displays all characters
