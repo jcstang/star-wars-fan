@@ -1,4 +1,10 @@
-module.exports = [
+require("dotenv").config();
+const mysql = require("mysql");
+const keys = require("./keys");
+const DBNAME = "star_wars_db";
+const TABLENAME = "characters";
+
+let characters = [
   {
     routeName: "yoda",
     name: "Yoda",
@@ -35,3 +41,38 @@ module.exports = [
     forcePoints: 10
   }
 ];
+
+let dbCharacters = getCharacters();
+
+
+function getCharacters() {
+  let connection = mysql.createConnection({
+    host: keys.creds.hostName,
+    port: 8819,
+    user: keys.creds.userName,
+    password: keys.creds.password,
+    database: "star_wars_db"
+  });
+  
+  let queryString = `SELECT * FROM ${DBNAME}.${TABLENAME};`;
+  
+  connection
+  .query(queryString,
+    function(err, data, fields) {
+      if(err) {
+        throw err;
+      }
+      
+      console.log('here is data');
+      // console.log(data);
+      return data;
+      
+    });
+}
+  
+
+
+module.exports = {
+  localCharacters: characters,
+  dbCharacters: dbCharacters
+}

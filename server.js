@@ -1,8 +1,12 @@
 // Dependencies
 // =============================================================
+require("dotenv").config();
+const mysql = require("mysql");
+const keys = require("./keys");
 const express = require("express");
 const path = require("path");
-const characters = require("./character-file");
+const characters = require("./character-file").localCharacters;
+const dbCharacters = require("./character-file.js").dbCharacters;
 const chalk = require("chalk");
 const debug = require("debug")("server");
 const dbHelper = require("./charDB-handler");
@@ -11,6 +15,8 @@ const dbHelper = require("./charDB-handler");
 // =============================================================
 const app = express();
 const PORT = 3005;
+const DBNAME = "star_wars_db";
+const TABLENAME = "characters";
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -52,7 +58,25 @@ app.get("/", function(req, res) {
 
 // Displays all characters
 app.get("/api/characters", function(req, res) {
-  return res.json(characters);
+  // return res.json(characters);
+  // debug(dbCharacters);
+  let connection = mysql.createConnection({
+    host: keys.creds.hostName,
+    port: 8819,
+    user: keys.creds.userName,
+    password: keys.creds.password,
+    database: "star_wars_db"
+  });
+  
+  let queryString = `SELECT * FROM ${DBNAME}.${TABLENAME};`;
+  connection.query(queryString, function(err, data, fields) {
+    if(err) {
+      throw err;
+    }
+    return res.json( data );
+  });
+
+  // return res.json( dbCharacters );
 });
 
 // Displays a single character, or returns false
