@@ -1,3 +1,4 @@
+console.log('I am loaded');
 
 
   // TODO: hide the form
