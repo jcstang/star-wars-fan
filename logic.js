@@ -1,4 +1,8 @@
-console.log('I am loaded');
+$(document).ready(function() {
+
+
+
+  console.log('I am loaded');
 
 
   // TODO: hide the form
@@ -33,7 +37,9 @@ console.log('I am loaded');
   $("#new-char-btn").on("click", function() {
     // do new charcter create things
     // TODO: display or route to some sort of form
-    console.log('stuff');
+    // console.log('stuff');
     
     $("#new-char-form").show();
   });
+
+});
