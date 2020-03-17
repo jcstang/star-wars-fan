@@ -1,6 +1,7 @@
-$(document).ready(() => {
 
 
+  // TODO: hide the form
+  // $("#new-character-form").hide();
 
   // QUESTION: What is this code doing?
   $("#search-btn").on("click", function() {
@@ -28,11 +29,10 @@ $(document).ready(() => {
   });
 
 
-  $("#new-character-btn").on("click", () => {
+  $("#new-char-btn").on("click", function() {
     // do new charcter create things
+    // TODO: display or route to some sort of form
+    console.log('stuff');
+    
+    $("#new-char-form").show();
   });
-
-
-
-
-});
