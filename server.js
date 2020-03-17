@@ -19,6 +19,7 @@ app.use("/static", express.static('./static/'));
 // Star Wars Characters (DATA)
 // =============================================================
 // see character-file.js
+// teacher version for class is the master branch.
 
 // Routes
 // =============================================================
