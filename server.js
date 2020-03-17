@@ -27,43 +27,23 @@ app.use("/static", express.static('./static/'));
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
   // res.send("Welcome to the Star Wars Page!")
-  let thing = dbHelper.queryByName('blah');
-  console.log(thing);
+  // let thing = dbHelper.queryByName('blah');
+  // console.log(thing);
   console.log('has thing logged?');
+  dbHelper.getTheRows();
 
   // dbHelper.queryByName('blah2').then(function(data){
   //   console.log('inside then');
   //   debug(data);
   // });
 
-  dbHelper.queryByName('blah2').then(result => {
-    console.log('inside then');
-    debug(result);
-  });
+  // dbHelper.queryByName('blah2').then(result => {
+  //   console.log('inside then');
+  //   debug(result);
+  // });
 
   // ==== testing async await ===================
-  const db = makeDb(
-    {
-      host: keys.creds.hostName,
-      port: 8819,
-      user: keys.creds.userName,
-      password: keys.creds.password,
-      database: "star_wars_db"
-    }
-  );
   
-  try {
-    const someRows = await db.query( 'SELECT * FROM star_wars_db.character' );
-    // const otherRows = await db.query( 'SELECT * FROM other_table' );
-    // do something with someRows and otherRows
-    console.log(someRows);
-    console.log(someRows);
-    
-  } catch ( err ) {
-    // handle the error
-  } finally {
-    await db.close();
-  }
   // ==============================================
   
 

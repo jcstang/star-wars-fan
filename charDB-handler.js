@@ -81,6 +81,14 @@ let mysqlConfig = {
 };
 
 function makeDb(config) {
+  config = {
+    host: keys.creds.hostName,
+    port: 8819,
+    user: keys.creds.userName,
+    password: keys.creds.password,
+    database: "star_wars_db"
+  };
+
   const connection = mysql.createConnection( config );
   return {
     query( sql, args ) {
@@ -93,31 +101,65 @@ function makeDb(config) {
   };
 }
 
-const db = makeDb(
-  {
-    host: keys.creds.hostName,
-    port: 8819,
-    user: keys.creds.userName,
-    password: keys.creds.password,
-    database: "star_wars_db"
-  }
-);
+// const db = makeDb(
+//   {
+//     host: keys.creds.hostName,
+//     port: 8819,
+//     user: keys.creds.userName,
+//     password: keys.creds.password,
+//     database: "star_wars_db"
+//   }
+// );
 
-try {
-  const someRows = await db.query( 'SELECT * FROM star_wars_db.character' );
-  // const otherRows = await db.query( 'SELECT * FROM other_table' );
-  // do something with someRows and otherRows
-  console.log(someRows);
-  console.log(someRows);
+// try {
+//   const someRows = await db.query( 'SELECT * FROM star_wars_db.character' );
+//   // const otherRows = await db.query( 'SELECT * FROM other_table' );
+//   // do something with someRows and otherRows
+//   console.log(someRows);
+//   console.log(someRows);
   
-} catch ( err ) {
-  // handle the error
-} finally {
-  await db.close();
+// } catch ( err ) {
+//   // handle the error
+// } finally {
+//   await db.close();
+// }
+
+// ==== testing async await ===================
+const db = makeDb();
+const someRows = [];
+
+function getTheRows() {
+  try {
+    someRows = db.query( 'SELECT * FROM star_wars_db.characters' )
+      .then(function(response) {
+        console.log('inside then response line 135');
+        console.log(response);
+        
+        // res.sendFile(path.join(__dirname, "views", "index.html"));
+        // return true;
+        
+      });
+    // const otherRows = await db.query( 'SELECT * FROM other_table' );
+    // do something with someRows and otherRows
+    // console.log('somerows');
+    // console.log(someRows);
+    // res.sendFile(path.join(__dirname, "views", "index.html"));
+    
+  } catch ( err ) {
+    // handle the error
+  } finally {
+    db.close();
+    // return true;
+  }
+
 }
+// ==============================================
+
 
 module.exports = {
   queryByName: queryByName,
-  makeDb: makeDb
+  makeDb: makeDb,
+  someRows: someRows,
+  getTheRows: getTheRows
 }
 
